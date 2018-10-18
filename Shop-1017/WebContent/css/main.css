@@ -41,22 +41,29 @@ a{
     border: #222f3e 2px  solid;
     width: 100px;
 }
-#carttable  button{
-    height: 17px;
-    width: 17px;
-    border: 0px;
-    margin-top: 3px;
-}
+
 #carttable  button:hover{
     border: 1px #ffffff solid;
 }
 #carttable  button[name = "add"]{
+	height: 17px;
+    width: 17px;
+    border: 0px;
+    margin-top: 3px;
     background: url("../image/add.png");
 }
 #carttable  button[name = "dele"]{
+	height: 17px;
+    width: 17px;
+    border: 0px;
+    margin-top: 3px;
     background: url("../image/dele.png");
 }
 #carttable  button[name = "reduce"]{
+	height: 17px;
+    width: 17px;
+    border: 0px;
+    margin-top: 3px;
     background: url("../image/reduce.png");
 }
 

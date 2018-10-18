@@ -111,6 +111,7 @@ public class ShopServlet extends HttpServlet {
 			pw.println("<tr><td colspan=\"6\" align = \"right\">当前没有商品...</td></tr>");
 		}
 		pw.println("</table></body>");
+		pw.close();
 		
 	}
 

@@ -35,27 +35,37 @@ public class CartServlet extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		HttpSession session =request.getSession();
 		
+		
+		
+				
 		pw.println("<html>" + 
 				"<head>" + 
 				"    <title>购物车</title>" + 
-				"    <link rel=\"stylesheet\" href=\"./css/main.css\">" + 
-				
+				"	 <link rel=\"stylesheet\" href=\"./css/main.css\">" + 
+				"	 <script src=\"./js/main.js\"></script>" + 
 				"    <style>" + 
 				"    </style>" + 
 				"</head>" + 
 				"<body >" + 
 				" <div>" + 
+				" <div>" + 
+				" <form action=\"CheckOut\" method=\"post\"  onsubmit=\"return goCheckout()\">" + 
+				"	<input type=\"hidden\" name=\"checktype\" id=\"checktype\" value=\"checkloc\" />"+
+				"	<input type=\"hidden\" id=\"checkvalue\" name=\"checkvalue\"  />"+
+				"	<input type=\"hidden\" name=\"gototal\" id=\"gototal\" />"+
 				"	<table id=\"carttable\" >" + 
 				"	        <caption>购物车</caption>" + 
+				//隐藏域  checktype  checkvalue（选择结算的商品） gototal（金额）
+			
 				"	        <tr>"+ 
-				"				<td><input name=\"check\" type=\"checkbox\"  onclick=\"checkAll(this)\"/>全选</td>" + 
+				"				<td><input name=\"check\" type=\"checkbox\" onchange=\"checktotal()\" onclick=\"checkAll(this)\"/>全选</td>" + 
 				"	            <td><img alt=\"\" src=\"\">商品详情</td>" + 
 				"	            <td>商品ID</td>" + 
 				"	            <td>商品名</td>" + 
 				"	            <td>商品单价</td>" + 
 				"	            <td>商品数量</td>" + 
 				"               <td>操作"+ 
-				"				<button type=\"button\" name=\"dele\" onclick=\"dele()\"></button></td>" + 
+				"				<button type=\"button\" name=\"dele\" onclick=\"deleAll()\"></button></td>" + 
 				"				</td>" + 
 				"	        </tr>");
 		@SuppressWarnings("unchecked")
@@ -68,35 +78,38 @@ public class CartServlet extends HttpServlet {
 				ProductInfo entrykey =entry.getKey();
 				int entrynum =entry.getValue();
 				checkout+=(Double.parseDouble(entrykey.getPprice())*entrynum);
-				pw.println("	        <tr>" + 
-						"				<td><input name=\"check\" type=\"checkbox\" onchange=\"checktotal()\"/>"+ 
-						"				<td><img alt=\"商品详情\" src=\"./image/dog.png\"></td>" + 
-						"	            <td>"+entrykey.getPid()+"</td>" + 
-						"	            <td>"+entrykey.getPname()+"</td>" + 
-						"	            <td>"+entrykey.getPprice()+"</td>" + 
-						"	            <td>"+entrynum+"</td>" + 
-						"				<td><button type=\"button\" name=\"add\" onclick=\"add(this)\" ></button>" + 
-						"				<button type=\"button\" name=\"reduce\" onclick=\"reduce(this)\" ></button>" + 
-						"               <button type=\"button\" name=\"dele\" onclick=\"deleme(this)\" ></button></td>"+ 
-						"	        </tr>");
+				pw.println(
+					"	        <tr>" + 
+					"				<td><input name=\"check\" type=\"checkbox\" onchange=\"checktotal()\"/>"+ 
+					"				<td><img alt=\"商品详情\" src=\"./image/dog.png\"></td>" + 
+					"	            <td>"+entrykey.getPid()+"</td>" + 
+					"	            <td>"+entrykey.getPname()+"</td>" + 
+					"	            <td>"+entrykey.getPprice()+"</td>" + 
+					"	            <td>"+entrynum+"</td>" + 
+					"				<td><button type=\"button\" name=\"add\" onclick=\"add(this)\" ></button>" + 
+					"				<button type=\"button\" name=\"reduce\" onclick=\"reduce(this)\" ></button>" + 
+					"               <button type=\"button\" name=\"dele\" onclick=\"deleme(this)\" ></button></td>"+ 
+					"	        </tr>");
 				
 			}
 				
 			pw.println("<tr><td><a href=\"ShopServlet\">&nbsp继续购物</a></td><td td colspan=\"6\" align=\"right\">总计："+checkout+"￥&nbsp</td></tr>");
 			pw.println("<tr><td colspan=\"6\" align=\"right\" border=\"0\">合计："
 						+ "<span id=\"total\">Total&nbsp</span></td>"
-						+ "<td align=\"center\"><a href=\"javascript:goCheckout()\">&nbsp结算</a></td></tr>");
+						+ "<td align=\"center\"><button type=\"submit\">结算</button></td></tr>");
 			
 		}else {
 			pw.println("<tr><td colspan=\"7\" >当前没有商品,快去<a href=\"ShopServlet\">购买</a>吧!!</td></tr>");
 		}
 
 		pw.println(
-				"</table>	" + 
+				"	</table>	" + 
+				"</form>	" + 
 				"</div>" + 
 				"</body>" + 
 				"<script src=\"./js/main.js\"></script>" + 
 				"</html>");
+		pw.close();
 	}
 
 

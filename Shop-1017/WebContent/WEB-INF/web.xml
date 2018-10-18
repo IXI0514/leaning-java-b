@@ -63,4 +63,14 @@
     <servlet-name>CheckOutServlet</servlet-name>
     <url-pattern>/CheckOut</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveInfoServlet</display-name>
+    <servlet-name>SaveInfoServlet</servlet-name>
+    <servlet-class>com.yunsi.shop.servlet.SaveInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveInfoServlet</servlet-name>
+    <url-pattern>/SaveInfo</url-pattern>
+  </servlet-mapping>
 </web-app>

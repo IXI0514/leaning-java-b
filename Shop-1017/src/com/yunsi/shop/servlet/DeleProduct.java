@@ -18,6 +18,7 @@ public class DeleProduct extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("dele......");
 		response.setContentType("text/html;charset=utf-8");
 		String deleno =request.getParameter("deleno");
 		System.out.println(deleno);

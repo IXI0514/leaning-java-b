@@ -1,12 +1,6 @@
 package com.yunsi.shop.service.impl;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.List;
 
-import com.yunsi.shop.bean.ProductInfo;
 import com.yunsi.shop.bean.UserBean;
 import com.yunsi.shop.dao.IShopDao;
 import com.yunsi.shop.dao.impl.ShopDaoImpl;
@@ -34,13 +28,14 @@ public class ShopServiceImpl implements IShopService{
 			return isd.loginByNickname(user);
 		}
 	}
+	@Override
+	public UserBean queryuser(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 	
 	
-	@Override
-	public ProductInfo getProductInfo(String pid) {
-		return isd.getProductInfo(pid);
-	}
 
 }

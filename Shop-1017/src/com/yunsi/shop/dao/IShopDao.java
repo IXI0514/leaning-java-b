@@ -1,6 +1,6 @@
 package com.yunsi.shop.dao;
 
-import com.yunsi.shop.bean.ProductInfo;
+
 import com.yunsi.shop.bean.UserBean;
 
 public interface IShopDao {
@@ -18,6 +18,6 @@ public interface IShopDao {
 	 */
 	int loginByNickname(UserBean user);
 
-	ProductInfo getProductInfo(String pid);
+
 
 }
