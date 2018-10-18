@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <servlet>
+  	<servlet-name>E</servlet-name>
+  	<servlet-class>com.yunsi.servlet.ServletE</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>F</servlet-name>
+  	<servlet-class>com.yunsi.servlet.ServletF</servlet-class>
+  </servlet>
+   <servlet>
+  	<servlet-name>BuyKeyboard</servlet-name>
+  	<servlet-class>com.yunsi.servlet.shoppingcart.BuyKeyboardServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>BuyMouse</servlet-name>
+  	<servlet-class>com.yunsi.servlet.shoppingcart.BuyMouseServlet</servlet-class>
+  </servlet>
+   <servlet>
+  	<servlet-name>ShowCart</servlet-name>
+  	<servlet-class>com.yunsi.servlet.shoppingcart.ShowCartServlet</servlet-class>
+  </servlet>
+  
+  
+  <servlet-mapping>
+  	<servlet-name>E</servlet-name>
+  	<url-pattern>/E</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>F</servlet-name>
+  	<url-pattern>/F</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BuyKeyboard</servlet-name>
+  	<url-pattern>/servlet/BuyKeyboardServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BuyMouse</servlet-name>
+  	<url-pattern>/servlet/BuyMouseServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ShowCart</servlet-name>
+  	<url-pattern>/servlet/ShowCartServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!-- 设置session过期时间
+
+	2次访问session的间隔不能超过1分钟，一旦超过，session就过期了！
+-->
+  <session-config>
+  	<session-timeout>1</session-timeout>
+  </session-config>
+  
+</web-app>

@@ -1,0 +1,62 @@
+
+
+#login{
+	margin: auto;
+	position: relative;
+	height: 200px;
+	width: 300px;
+	background-color: #b2bec3;
+	border-radius: 10px;
+	padding-top: 20px;
+	padding-left: 20px;
+	margin-top:100px;
+	font-size: 20px;
+}
+
+#login tr {
+	height:35px;
+    line-height: 21px;
+
+}
+#login caption{
+	line-height: 50px;
+	font-size: 30px;
+	font-family: "微软雅黑";
+}
+#login button {
+	height: 25px;
+	width: 100px;
+}
+a{
+	text-decoration: none;
+	color: cornflowerblue;
+}
+#shoptable,#carttable{
+	border-collapse: collapse;
+	font-size: 15bpx;
+	line-height: 30px;
+}
+
+#shoptable td,#carttable td{
+    border: #222f3e 2px  solid;
+    width: 100px;
+}
+#carttable  button{
+    height: 17px;
+    width: 17px;
+    border: 0px;
+    margin-top: 3px;
+}
+#carttable  button:hover{
+    border: 1px #ffffff solid;
+}
+#carttable  button[name = "add"]{
+    background: url("../image/add.png");
+}
+#carttable  button[name = "dele"]{
+    background: url("../image/dele.png");
+}
+#carttable  button[name = "reduce"]{
+    background: url("../image/reduce.png");
+}
+
