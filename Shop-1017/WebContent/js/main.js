@@ -148,4 +148,10 @@ function  checkpay() {
 }
 
 
+function  savetableinfo() {
+    alert("将要跳转到下载页面");
+    console.log(document.getElementById("detailtable").innerHTML);
+    document.getElementById("tableinfo").value=document.getElementById("detailtable").innerHTML;
+}
+
 

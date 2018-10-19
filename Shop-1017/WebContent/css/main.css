@@ -1,36 +1,51 @@
-
-
-#login{
-	margin: auto;
-	position: relative;
-	height: 200px;
-	width: 300px;
-	background-color: #b2bec3;
-	border-radius: 10px;
-	padding-top: 20px;
-	padding-left: 20px;
-	margin-top:100px;
-	font-size: 20px;
-}
-
-#login tr {
-	height:35px;
-    line-height: 21px;
-
-}
-#login caption{
-	line-height: 50px;
-	font-size: 30px;
-	font-family: "微软雅黑";
-}
-#login button {
-	height: 25px;
-	width: 100px;
-}
 a{
 	text-decoration: none;
 	color: cornflowerblue;
 }
+
+/*登录界面 start*/
+#loginbox{
+	margin: auto;
+	position: relative;
+	height: 380px;
+	width: 500px;
+	background-color: #b2bec3;
+	margin: 10% auto;
+	border-radius: 10px;
+	font-size: 20px;
+}
+#loginbox2{
+	width: 500px;
+	margin-top: 1%;
+	position: fixed;
+}
+#loginform{
+	margin-left:20%;
+}
+#logintable tr{
+	height:35px;
+	line-height: 60px;
+}
+#logintable td{
+	text-align: center;
+}
+#logintable caption{
+	font-size: 35px;
+	height:100px;
+	line-height: 100px;
+}
+#logintable input{
+	height: 28px;
+	border: none;
+	padding-left: 5px;
+}
+#loginbox button {
+	height: 35px;
+	width: 130px;
+	border:none;
+}
+/*登录界面end*/
+
 #shoptable,#carttable{
 	border-collapse: collapse;
 	font-size: 15bpx;

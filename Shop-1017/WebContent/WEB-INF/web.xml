@@ -73,4 +73,14 @@
     <servlet-name>SaveInfoServlet</servlet-name>
     <url-pattern>/SaveInfo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DownInfoServlet</display-name>
+    <servlet-name>DownInfoServlet</servlet-name>
+    <servlet-class>com.yunsi.shop.servlet.DownInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownInfoServlet</servlet-name>
+    <url-pattern>/DownInfo</url-pattern>
+  </servlet-mapping>
 </web-app>

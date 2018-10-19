@@ -32,13 +32,15 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		System.out.println("用户名："+username+"密码："+password);
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		
 		if(username!=null&&password!=null) {
 			IShopService iss = new ShopServiceImpl();
 			int result =iss.login(username, password);;
 		
-			response.setCharacterEncoding("utf-8");
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter pw = response.getWriter();
 			//result= 1 登录成功 跳转界面
 			if(result==1) {
 				HttpSession session = request.getSession();
@@ -48,18 +50,17 @@ public class LoginServlet extends HttpServlet {
 			}
 			//result= 0 登录失败 
 			else if (result ==0) {
-				pw.println ("<script>alert('用户名密码b...');window.location='index.html'</script>");
+				pw.println ("<script>alert('用户名密码错误...');window.location='index.html'</script>");
 			}
 			//resulr = -1 登录错误
 			else {
 				pw.println ("<script>alert('服务端出错...');window.location='index.html'</script>");
 			}
-			pw.close();
+		
 		}else {
-			response.sendRedirect("LoginServlet");
+			pw.println("<script>alert('请登录...');window.location='index.html'</script>");
 		}
-		
-		
+		pw.close();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
