@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.yunsi.shop.bean.ProductInfo;
 
 
-public class DeleProduct extends HttpServlet {
+public class DeleProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
@@ -40,7 +40,7 @@ public class DeleProduct extends HttpServlet {
 			}
 			
 		}
-		response.sendRedirect("CartServlet");
+		response.sendRedirect("cart");
 		
 	}
 

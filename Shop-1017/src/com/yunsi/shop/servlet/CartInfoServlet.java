@@ -16,13 +16,13 @@ import com.yunsi.shop.bean.ProductInfo;
 /**
  * Servlet implementation class SaveInfoServlet
  */
-public class SaveInfoServlet extends HttpServlet {
+public class CartInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SaveInfoServlet() {
+    public CartInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +31,18 @@ public class SaveInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//request.setCharacterEncoding("UTF-8");
+		//response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+		
 		HttpSession session =request.getSession(); 
 		//支付信息到会话中 银行bank  卡号cardid  密码 password
 		String bank = request.getParameter("bank");
 		String cardid = request.getParameter("cardid");
 		String password = request.getParameter("password");
 		
-		bank = new String (bank.getBytes("iso-8859-1"),"Utf-8");
+		
+		
 		session.setAttribute("checkpay", bank+"@"+cardid+"@"+password);
 		
 		
@@ -46,19 +51,18 @@ public class SaveInfoServlet extends HttpServlet {
 		String checkvalue =(String) session.getAttribute("checkvalue");
 		String gototal =(String) session.getAttribute("gototal");
 		
-	
-		checkvalue = new String (checkvalue.getBytes("iso-8859-1"),"Utf-8");
+		//bank = new String (bank.getBytes("iso-8859-1"),"Utf-8");
+		//checkvalue = new String (checkvalue.getBytes("iso-8859-1"),"Utf-8");
 		
 		String[] strs = checkvalue.split("@");
-		int len =strs.length;
 		
 		
 		//邮寄信息  checkloc：收件人reuser  电话phone  邮编 postcode 地址 site
 
 		String checkloc =(String) session.getAttribute("checkloc");
-		checkloc = new String (checkloc.getBytes("iso-8859-1"),"Utf-8");	
+		//checkloc = new String (checkloc.getBytes("iso-8859-1"),"Utf-8");	
 		String[] locs = checkloc.split("@");
-		
+		System.out.println("checkloc:"+checkloc);
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
@@ -67,14 +71,14 @@ public class SaveInfoServlet extends HttpServlet {
 				"<html >" + 
 				"<head>" + 
 				"    <title>结算信息</title>" + 
-				"	 <link rel=\"stylesheet\" href=\"./css/main.css\">" + 
-				"	 <script src=\"./js/main.js\"></script>" + 
+				"	 <link rel=\"stylesheet\" href=\"../css/main.css\">" + 
+				"	 <script src=\"../js/main.js\"></script>" + 
 				"</head>" + 
 				"<body>" + 
 				"<div id=\"detailbox\">" + 
-				"    <form action=\"DownInfo\" method=\"post\" onsubmit=\"savetableinfo()\">" + 
-				"	 <span id=\"detailtable\">	"+
-				"    <table border=\"1\" cellspacing=\"0\">" + 
+				"    <form action=\"downinfo\" method=\"post\" onsubmit=\"savetableinfo()\">" + 
+				"	 <span id=\"tablespan\">	"+
+				"    <table id=\"detailtable\" cellspacing=\"0\">" + 
 				"        <caption >购物详细清单</caption>" + 
 				"        <tr>" + 
 				"            <th colspan=\"4\" align=\"left\">商品清单：</th>" + 
@@ -145,7 +149,7 @@ public class SaveInfoServlet extends HttpServlet {
 				
 				"    <table>" +
 				"        <tr>" + 
-				"            <td><button onclick=\"javascript:location.href='index.html'\">退出应用</button></td>" + 
+				"            <td><button onclick=\"javascript:location.href='logout'\">退出应用</button></td>" + 
 				"			<input type=\"hidden\" name=\"tableinfo\" id=\"tableinfo\" value=\"\" />"+   
 				"            <td><button type=\"submit\" >下载清单</button></td>" + 
 				"        </tr>" + 

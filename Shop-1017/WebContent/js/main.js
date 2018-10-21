@@ -24,7 +24,6 @@ function checkAll(node) {
 //批量删除
 
 function deleAll() {
-	alert("deleAoo");
     var array = checkedinput();
     var len =array.length;
 
@@ -39,7 +38,7 @@ function deleAll() {
         }
         alert("已删除："+len+"行");
         console.log("已删除："+len+"行");
-        var url = "DeleProduct?deleno="+pid;
+        var url = "dele?deleno="+pid;
         location.href=url;
 
     }
@@ -51,7 +50,7 @@ function deleme(me) {
     //var p = tr.parentNode;
     //p.removeChild(tr);
     var text =tr.getElementsByTagName("td")[2].textContent
-    var url = "DeleProduct?deleno="+text;
+    var url = "dele?deleno="+text;
     location.href=url;
 }
 
@@ -120,7 +119,6 @@ function  checkloc() {
     msg=regx1.test(user)?"":"用户名 "+regx2.test(phone)?"":"电话 "+regx3.test(postcode)?"":"邮编 "+regx4.test(site)?"":"地址";*/
 
     if (regx1.test(reuser)&&regx2.test(phone)&&regx3.test(postcode)&&regx4.test(site)){
-    	alert("true");
         return true;
     }
     alert("填写有误！！\n请按要求填写");
@@ -151,7 +149,7 @@ function  checkpay() {
 function  savetableinfo() {
     alert("将要跳转到下载页面");
     console.log(document.getElementById("detailtable").innerHTML);
-    document.getElementById("tableinfo").value=document.getElementById("detailtable").innerHTML;
+    document.getElementById("tableinfo").value=document.getElementById("tablespan").innerHTML;
 }
 
 

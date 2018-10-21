@@ -26,7 +26,7 @@ public class CheckOutServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = request.getSession();
 		
-		String username = (String) session.getAttribute("username");
+		String username = (String) session.getAttribute("userinfo");
 		PrintWriter pw = response.getWriter();
 		
 		/*用户信息
@@ -52,33 +52,33 @@ public class CheckOutServlet extends HttpServlet {
 				pw.println("<html >" + 
 						"<head>" + 
 						"    <title>结算信息</title>" + 
-						"	 <link rel=\"stylesheet\" href=\"./css/main.css\">" + 
-						"	 <script src=\"./js/main.js\"></script>" + 
+						"	 <link rel=\"stylesheet\" href=\"../css/main.css\">" + 
+						"	 <script src=\"../js/main.js\"></script>" + 
 						"</head>" + 
 						"<body>" + 
 						"    <div id=\"locbox\">" + 
-						"        <form action=\"CheckOut\" method=\"post\"  onsubmit=\"return checkloc()\">" + 
+						"        <form action=\"checkout\" method=\"post\"  onsubmit=\"return checkloc()\">" + 
 						"			<input type=\"hidden\" name=\"checktype\" id=\"checktype\" value=\"payment\" />"+ 
 						"            <table id=\"loctable\">" + 
 						"                <caption >确认邮寄信息</caption>" +
 						"                <tr>" + 
-						"                    <td>收件人</td>" + 
+						"                    <td>收件人:</td>" + 
 						"                    <td><input name=\"reuser\" id=\"reuser\" type=\"text\" value=\""+username+"\"></td>" + 
+						"                </tr>" + 
 						"                <tr>" + 
-						"                <tr>" + 
-						"                    <td>电话</td>" + 
+						"                    <td>电话:</td>" + 
 						"                    <td><input name=\"phone\" id=\"phone\"  type=\"text\" ></td>" + 
 						"                </tr>" + 
 						"                <tr>" + 
-						"                    <td>邮编</td>" + 
+						"                    <td>邮编:</td>" + 
 						"                    <td><input name=\"postcode\" id=\"postcode\"  type=\"text\" ></td>" + 
 						"                </tr>" + 
 						"                <tr>" + 
-						"                    <td>地址</td>" + 
+						"                    <td>地址:</td>" + 
 						"                    <td><input name=\"site\" id=\"site\" type=\"text\" ></td>" + 
 						"                </tr>" + 
 						"                <tr>" + 
-						"                    <td colspan=\"2\"><button type=\"submit\" >下一步</button></td>" + 
+						"                    <td colspan=\"2\" align=\"center\"><button type=\"submit\" >下一步</button></td>" + 
 						"                </tr>" + 
 						"            </table>" + 
 						"        </form>" + 
@@ -104,12 +104,12 @@ public class CheckOutServlet extends HttpServlet {
 						"<html >" + 
 						"<head>" + 
 						"    <title>结算信息</title>" + 
-						"	 <link rel=\"stylesheet\" href=\"./css/main.css\">" + 
-						"	 <script src=\"./js/main.js\"></script>" + 
+						"	 <link rel=\"stylesheet\" href=\"../css/main.css\">" + 
+						"	 <script src=\"../js/main.js\"></script>" + 
 						"</head>" + 
 						"<body>" + 
 						"    <div id=\"locbox\">" + 
-						"        <form action=\"SaveInfo\" method=\"post\" onsubmit=\"return checkpay()\">" + 
+						"        <form action=\"cartinfo\" method=\"post\" onsubmit=\"return checkpay()\">" + 
 						"            <table id=\"loctable\">" + 
 						"                <caption>付款信息</caption>" + 
 						"                <tr>" + 
@@ -123,7 +123,7 @@ public class CheckOutServlet extends HttpServlet {
 						"                            <option value=\"中国招商银行\">中国招商银行</option>" + 
 						"                        </select>" + 
 						"                    </td>" + 
-						"                <tr>" + 
+						"                </tr>" + 
 						"                <tr>" + 
 						"                    <td>卡号</td>" + 
 						"                    <td><input id=\"cardid\" name=\"cardid\" type=\"text\" ></td>" + 
@@ -137,7 +137,7 @@ public class CheckOutServlet extends HttpServlet {
 						"                    <td><sapn>"+money+"￥</sapn></td>" + 
 						"                </tr>" + 
 						"                <tr>" + 
-						"                    <td colspan=\"2\"><button type=\"submit\" >下一步</button></td>" + 
+						"                    <td colspan=\"2\" align=\"center\"><button type=\"submit\" >下一步</button></td>" + 
 						"                </tr>" + 
 						"            </table>" + 
 						"        </form>" + 

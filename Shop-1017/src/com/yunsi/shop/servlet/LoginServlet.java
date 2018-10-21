@@ -28,31 +28,34 @@ public class LoginServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Servlet....");
+		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		System.out.println("用户名："+username+"密码："+password);
 		
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
+		
 		PrintWriter pw = response.getWriter();
 		
 		if(username!=null&&password!=null) {
 			IShopService iss = new ShopServiceImpl();
 			int result =iss.login(username, password);;
 		
-			//result= 1 登录成功 跳转界面
+			//result= 1 登录成功 跳转界面 将用户信息存到session中  userinfo
 			if(result==1) {
 				HttpSession session = request.getSession();
-				session.setAttribute("username", username);
-				pw.println ("<script>alert('登录成功...');window.location='ShopServlet'</script>");
+				session.setAttribute("userinfo", username);
+				pw.println ("<script>alert('登录成功...');window.location='shop'</script>");
 				
 			}
 			//result= 0 登录失败 
 			else if (result ==0) {
 				pw.println ("<script>alert('用户名密码错误...');window.location='index.html'</script>");
 			}
-			//resulr = -1 登录错误
+			//result = -1 登录错误
 			else {
 				pw.println ("<script>alert('服务端出错...');window.location='index.html'</script>");
 			}

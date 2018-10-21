@@ -15,12 +15,12 @@ public class DownInfoServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			//request.setCharacterEncoding("UTF-8");
 			
 			String filename = new String("账单.xls".getBytes(),"iso_8859_1");//设置文件名称的编码格式
 			String tableinfo = request.getParameter("tableinfo");
 			
-			tableinfo = new String (tableinfo.getBytes("iso-8859-1"),"Utf-8");
+			//tableinfo = new String (tableinfo.getBytes("iso-8859-1"),"Utf-8");
 			StringBuffer sb = new StringBuffer(tableinfo);//将表格信息放入内存
 			System.out.println(sb);
 			

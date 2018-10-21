@@ -21,21 +21,24 @@ import javax.servlet.http.HttpSession;
 
 import com.yunsi.shop.bean.ProductInfo;
 
-
 /**
  * Servlet implementation class ShopServlet
  */
 public class ShopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-	
 	public ShopServlet() {
-        super();
+		super();
 
-    }
+	}
+
 	@Override
 	public void init() throws ServletException {
+
+		/**
+		 * 读取文件 获得商品列表 并存放在context中 ServletContext.setAttribute("plist", plist)
+		 * plist=HashMap<String,ProductInfo> 商品id 商品对象
+		 */
 		ServletConfig sconf = this.getServletConfig();
 		ServletContext scont = this.getServletContext();
 		String filepath = sconf.getInitParameter("filepath");
@@ -45,12 +48,12 @@ public class ShopServlet extends HttpServlet {
 		try {
 			br = new BufferedReader(new FileReader(realpath));
 			String line = null;
-			HashMap<String,ProductInfo> plist = new HashMap<String,ProductInfo>();
-			while((line = br.readLine())!=null) {
-				String[] strs =line.trim().split("\\s+");
-				if(strs.length==4) {
+			HashMap<String, ProductInfo> plist = new HashMap<String, ProductInfo>();
+			while ((line = br.readLine()) != null) {
+				String[] strs = line.trim().split("\\s+");
+				if (strs.length == 4) {
 					ProductInfo p = new ProductInfo(strs[0], strs[1], strs[2], strs[3]);
-					plist.put(strs[0],p);
+					plist.put(strs[0], p);
 				}
 			}
 			scont.setAttribute("plist", plist);
@@ -59,7 +62,7 @@ public class ShopServlet extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (br!=null) {
+			if (br != null) {
 				try {
 					br.close();
 				} catch (IOException e) {
@@ -68,33 +71,55 @@ public class ShopServlet extends HttpServlet {
 			}
 		}
 	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter pw = response.getWriter();
 
-		pw.println("<head>" + 
-				"	    <meta charset=\"UTF-8\">" + 
-				"	    <title>购物</title>" + 
-				"	    <link rel=\"stylesheet\" href=\"./css/main.css\">" + 
-				"	    <script src=\"./js/main.js\"></script>" + 
-				"	    </head>");
-		pw.println("<body><table id=\"shoptable\" >");
-		pw.println("<tr>" + 
-					"<td><img alt=\"\" src=\"\">商品详情</td>" + 
-					"<td>商品ID</td>" + 
-					"<td>商品名</td>" + 
-					"<td>商品单价</td>" + 
-					"<td>商品库存</td>" + 
-					"<td>操作</td>" + 
-					"</tr> ");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
 		
-		//获取商品目录
+		PrintWriter pw = response.getWriter();
+		
+		//表头
+		pw.println(
+				"<!DOCTYPE html>" + 
+				"<html lang=\"en\">" + 
+				"<head>" + 
+				"    <meta charset=\"UTF-8\">" + 
+				"    <title>购物商场</title>" + 
+				"    <link rel=\"stylesheet\" href=\"./css/main.css\">" + 
+				"    <script src=\"./js/main.js\" ></script>" + 
+				"</head>" + 
+				"<body>" + 
+				"    <div id=\"tablebox\">" + 
+				"        <table id=\"carttable\">" );
+		
+		HttpSession session = request.getSession();
+		String userinfo = (String) session.getAttribute("userinfo");
+		if(userinfo!=null) {
+			pw.println("<tr align=\"left\"id=\"shopnav\"><td colspan=\"5\">欢迎用户！！"+userinfo+"</td>" );
+			pw.println("<td align=\"center\" colspan=\"1\"><button onclick=\"javascript:location.href='servlet/logout'\">退出登录</button></td></tr>");
+		}else {
+			pw.println("<tr id=\"shopnav\"><td align=\"right\" colspan=\"6\"><button onclick=\"javascript:location.href='index.html'\">登录&nbsp&nbsp</button></td></tr>");
+		}
+		pw.println(
+				"            <tr>" + 
+				"                <td>商品详情</td>" + 
+				"                <td>商品ID</td>" + 
+				"                <td>商品名</td>" + 
+				"                <td>单价</td>" + 
+				"                <td>库存</td>" + 
+				"                <td>购买</td>" + 
+				"            </tr>"
+				);
+		
+		/**
+		 * 从Servlet中获取商品目录 
+		 * 		ServletContext.getAttribute("plist")
+		 */
 		ServletContext scont = this.getServletContext();
-		@SuppressWarnings("unchecked")
 		HashMap<String,ProductInfo> list  =(HashMap<String,ProductInfo>) scont.getAttribute("plist");
 		Collection<ProductInfo> keys=list.values();
-		System.out.println("已加载商品总数："+list.size());
+		System.out.println("加载商品数："+list.size());
 		if(list!=null&&list.size()>0) {
 			for(ProductInfo p:keys) {
 					pw.println("<tr>" + 
@@ -103,19 +128,19 @@ public class ShopServlet extends HttpServlet {
 							"<td>"+p.getPname()+"</td>" + 
 							"<td>"+p.getPprice()+"</td>" + 
 							"<td>"+p.getPstore()+"</td>" + 
-							"<td><a href=\"BuyProduct?pid="+p.getPid()+"\" >购买</a></td>" + 
+							"<td><a href=\"servlet/buy?pid="+p.getPid()+"\" >购买</a></td>" + 
 							"</tr> ");
 			}
-			pw.println("<tr><td colspan=\"6\" align = \"right\"><a href=\"CartServlet\">结算&nbsp</a></td></tr>");
+			pw.println("<tr><td colspan=\"6\" align = \"right\"><a href=\"servlet/cart\">购物车&nbsp</a></td></tr>");
 		}else {
 			pw.println("<tr><td colspan=\"6\" align = \"right\">当前没有商品...</td></tr>");
 		}
-		pw.println("</table></body>");
+		pw.println("</table></div></body>");
 		pw.close();
-		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
