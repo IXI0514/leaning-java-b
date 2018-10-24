@@ -34,10 +34,8 @@ public class FormatFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		/*request.setCharacterEncoding(encoding);
-		response.setCharacterEncoding(encoding);*/
+	
 		System.out.println("Filter:标准化请求格式...");
-		request.setCharacterEncoding(encoding);
 		request.setCharacterEncoding(encoding);
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
@@ -50,5 +48,4 @@ public class FormatFilter implements Filter {
 		// TODO Auto-generated method stub
 		this.encoding = fConfig.getInitParameter("encoding");
 	}
-
 }
