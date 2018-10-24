@@ -3,14 +3,13 @@
 <%@ page import="com.yunsi.jsapemp.bean.Emp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.yunsi.jsapemp.bean.Page"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
-	
 	function seleAll(me){
 		alert("SelectAll");
 		var nodes = document.getElementsByName("echeck");
@@ -36,7 +35,6 @@
 				
 				document.getElementById("myform").submit();
 			}
-			
 		}else{
 			alert("没有选择！！");
 		}	 
@@ -57,16 +55,6 @@
 </head>
 <body>
 	<!--获取list -->
-	<%
-		
-		Page temp=(Page)session.getAttribute("page");
-		List<Emp> list=temp.getList();
-		int pnum= temp.getPage();
-		int num=temp.getPagenumber();
-		System.out.print("list:"+list);
-			
-		
-	%>
 	<form id="myform" action="dele" method="post">
 	<input type="hidden" name="empno" id="hempno"  >
 	<table>
@@ -80,26 +68,19 @@
 			<td colspan="2">操作</td>		
 		</tr>
 	
-	
-	<%
-		
-		if(list!=null&list.size()>0){
-			for (Emp p:list){
-	%>
-	<tr>
-		<td><input type="checkbox" name="echeck" value="<%=p.getEmpno()%>"> </td>
-		<td><%=p.getEmpno() %> </td>
-		<td><%=p.getEname()%></td>
-		<td><%=p.getJob()%></td>
-		<td><%=p.getHiredate() %></td>
-		<td><%=p.getSal()%></td>
-		<td><a href="dele?empno=<%=p.getEmpno()%>">删除</a></td>
-		<td><a href="update?empno=<%=p.getEmpno()%>">修改</a></td>
-	</tr>
-	
-	<%		}	
-		} 
-	%>		
+	<c:forEach items="${page.getList()}" var="p">
+		<tr>
+			<td><input type="checkbox" name="echeck" value="${p.getEmpno()}"> </td>
+			<td>${p.getEmpno()}</td>
+			<td>${p.getEname()}</td>
+			<td>${p.getJob()}</td>
+			<td>${p.getHiredate()}</td>
+			<td>${p.getSal()}</td>
+			<td><a href="dele?empno=${p.getEmpno()}">删除</a></td>
+			<td><a href="update?empno=${p.getEmpno()} ">修改</a></td>
+		</tr>
+
+	</c:forEach>
 	<tr>
 		<td colspan='7' align='center'>
 			<a href="list?turnpage=firstpage">第一页</a>&nbsp;
@@ -108,7 +89,7 @@
 			<a href="list?turnpage=endpage">最后页</a>
 			
 		</td>
-		<td><%=pnum+"/"+num %></td>
+		<td>${page.getPage()}/${page.getPagenumber()}</td>
 	</tr>
 	<tr>
 		<td colspan='8' align='right'>

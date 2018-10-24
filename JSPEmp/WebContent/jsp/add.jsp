@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>添加人员信息</title>
 <script type="text/javascript">
-alert("132");
+	alert("添加员工！！");
 	function checkpost() {
 		var ename= document.getElementById("nameid").value;
 		var ejob= document.getElementById("jobid").value;

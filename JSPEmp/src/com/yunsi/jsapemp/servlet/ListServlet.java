@@ -66,9 +66,10 @@ public class ListServlet extends HttpServlet {
 			int num=page.getPagenumber();
 			String turn =request.getParameter("turnpage");
 			EmpService es = new EmpService();
-			System.out.println(turn);
-			System.out.println("页数："+pnum+":"+num);
+			
+			System.out.println("当前页数："+pnum+"/"+num);
 			if(turn!=null) {
+				System.out.println("===请求："+turn);
 				if(turn.equals("firstpage")) {
 					page.setPage(1);
 					page = es.getEmps(page);
@@ -83,11 +84,13 @@ public class ListServlet extends HttpServlet {
 				}
 				else 
 					if(turn.equals("forward")){
+						
 						if(pnum<num) {
 							page.setPage(pnum+1);
 							page = es.getEmps(page);
+							System.out.println("+1："+page);
 							session.setAttribute("page", page);
-							
+							response.sendRedirect("list");
 						}else {
 							pw.println("<script>alert('已经是最后一页');window.location.href='list';</script>");
 						}
@@ -103,22 +106,13 @@ public class ListServlet extends HttpServlet {
 							pw.println("<script>alert('已经是第一页') ; window.location.href='list';</script>");
 						}
 					}
-					/*EmpService es = new EmpService();
-					page = es.getEmps(page);
-					//System.out.println("servlet"+page.getList());
-					session.setAttribute("page", page);
-					response.sendRedirect("list");
-					//request.getRequestDispatcher("list").forward(request, response);
-					 */		
-			
+
 							
 			}else {
 				System.out.println("gojsp");
 				request.getRequestDispatcher("jsp/list.jsp").forward(request, response);
 			}
 		}
-		
-		//request.getRequestDispatcher("jsp/list.jsp").forward(request, response);
 		
 	}
 

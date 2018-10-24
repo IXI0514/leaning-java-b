@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="JSPEmp">
+    <wb-module deploy-name="1023-JSPEmp">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="JSPEmp"/>
-        <property name="java-output-path" value="/JSPEmp/build/classes"/>
+        <property name="java-output-path" value="/1023-JSPEmp/build/classes"/>
+        <property name="context-root" value="1023-JSPEmp"/>
     </wb-module>
 </project-modules>
